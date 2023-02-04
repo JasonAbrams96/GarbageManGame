@@ -1,0 +1,184 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://GarbageCollector.tscn" type="PackedScene" id=1]
+[ext_resource path="res://World.gd" type="Script" id=2]
+[ext_resource path="res://Sprites/background_3.png" type="Texture" id=3]
+[ext_resource path="res://Sprites/background_2.png" type="Texture" id=4]
+[ext_resource path="res://Sprites/background_1.png" type="Texture" id=5]
+
+[node name="World" type="Node"]
+script = ExtResource( 2 )
+
+[node name="Bakground" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -119.0
+margin_top = -98.0
+margin_right = 129.0
+margin_bottom = 142.0
+color = Color( 0, 0, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Sprite" type="Sprite" parent="Bakground"]
+position = Vector2( 119, 98 )
+texture = ExtResource( 5 )
+centered = false
+
+[node name="Sprite2" type="Sprite" parent="Bakground"]
+position = Vector2( 119, 98 )
+texture = ExtResource( 4 )
+centered = false
+
+[node name="Sprite3" type="Sprite" parent="Bakground"]
+position = Vector2( 119, 98 )
+texture = ExtResource( 3 )
+centered = false
+
+[node name="GarbageCollector" parent="." instance=ExtResource( 1 )]
+position = Vector2( 357.758, 232.552 )
+
+[node name="Garbage" type="Node2D" parent="."]
+z_index = 3
+
+[node name="OverLayer" type="CanvasLayer" parent="."]
+layer = 20
+
+[node name="Overlay" type="ColorRect" parent="OverLayer"]
+visible = false
+anchor_right = 1.002
+anchor_bottom = 1.0
+margin_right = -1.40009
+color = Color( 1, 1, 1, 0.0705882 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect" type="ColorRect" parent="OverLayer/Overlay"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -130.5
+margin_top = -104.5
+margin_right = 130.5
+margin_bottom = 104.5
+color = Color( 0, 0, 0, 1 )
+
+[node name="Dead" type="Control" parent="OverLayer/Overlay"]
+visible = false
+margin_left = 288.0
+margin_top = 260.0
+margin_right = 412.0
+margin_bottom = 260.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="OverLayer/Overlay/Dead"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -62.0
+margin_top = -120.0
+margin_right = 62.0
+margin_bottom = -24.0
+grow_horizontal = 2
+grow_vertical = 2
+custom_constants/separation = 24
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="OverLayer/Overlay/Dead/VBoxContainer"]
+margin_right = 124.0
+margin_bottom = 14.0
+text = "You Died!"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LblScore" type="Label" parent="OverLayer/Overlay/Dead/VBoxContainer"]
+margin_top = 38.0
+margin_right = 124.0
+margin_bottom = 52.0
+text = "Final Score: "
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="OverLayer/Overlay/Dead/VBoxContainer"]
+margin_top = 76.0
+margin_right = 124.0
+margin_bottom = 96.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_stretch_ratio = 0.0
+custom_constants/separation = 27
+alignment = 1
+
+[node name="BtnQuit" type="Button" parent="OverLayer/Overlay/Dead/VBoxContainer/HBoxContainer"]
+margin_right = 40.0
+margin_bottom = 20.0
+text = "Quit"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BtnRestart" type="Button" parent="OverLayer/Overlay/Dead/VBoxContainer/HBoxContainer"]
+margin_left = 67.0
+margin_right = 124.0
+margin_bottom = 20.0
+text = "Restart"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Pause" type="Control" parent="OverLayer/Overlay"]
+visible = false
+margin_left = 288.0
+margin_top = 260.0
+margin_right = 412.0
+margin_bottom = 260.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="OverLayer/Overlay/Pause"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -62.0
+margin_top = -120.0
+margin_right = 62.0
+margin_bottom = -24.0
+grow_horizontal = 2
+grow_vertical = 2
+custom_constants/separation = 24
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="OverLayer/Overlay/Pause/VBoxContainer"]
+margin_right = 124.0
+margin_bottom = 14.0
+text = "Paused"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BtnQuit" type="Button" parent="OverLayer/Overlay/Pause/VBoxContainer"]
+margin_top = 38.0
+margin_right = 124.0
+margin_bottom = 58.0
+text = "Quit"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="Dead" from="GarbageCollector" to="." method="_on_GarbageCollector_Dead"]
+[connection signal="Faster_Spawn" from="GarbageCollector/HUD" to="." method="_on_HUD_Faster_Spawn"]
+[connection signal="pressed" from="OverLayer/Overlay/Dead/VBoxContainer/HBoxContainer/BtnQuit" to="." method="_on_BtnQuit_pressed"]
+[connection signal="pressed" from="OverLayer/Overlay/Dead/VBoxContainer/HBoxContainer/BtnRestart" to="." method="_on_BtnRestart_pressed"]
+[connection signal="pressed" from="OverLayer/Overlay/Pause/VBoxContainer/BtnQuit" to="." method="_on_BtnQuit_pressed"]
+
+[editable path="GarbageCollector"]

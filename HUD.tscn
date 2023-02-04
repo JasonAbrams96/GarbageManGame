@@ -1,0 +1,28 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://HUD.gd" type="Script" id=1]
+
+[node name="HUD" type="CanvasLayer"]
+script = ExtResource( 1 )
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+margin_left = 1.5
+margin_right = 701.5
+margin_bottom = 40.0
+custom_constants/separation = 100
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LblHP" type="Label" parent="HBoxContainer"]
+margin_top = 13.0
+margin_right = 79.0
+margin_bottom = 27.0
+text = "Hit Points: 3"
+
+[node name="LblScore" type="Label" parent="HBoxContainer"]
+margin_left = 179.0
+margin_top = 13.0
+margin_right = 230.0
+margin_bottom = 27.0
+text = "Score: 0"

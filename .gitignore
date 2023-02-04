@@ -1,0 +1,13 @@
+*.exe
+*.import
+*.pck
+*.wasm
+*.js
+
+.import/
+.mono/
+
+
+export_presets.cfg
+
+

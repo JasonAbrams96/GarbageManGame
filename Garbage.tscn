@@ -1,0 +1,44 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Garbage.gd" type="Script" id=1]
+[ext_resource path="res://Sprites/Regular_Garbage.png" type="Texture" id=2]
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 25.2925
+
+[sub_resource type="CircleShape2D" id=2]
+radius = 28.079
+
+[node name="Garbage" type="KinematicBody2D" groups=[
+"garbage",
+]]
+collision_layer = 4
+collision_mask = 3
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
+position = Vector2( -2.9859, 4.0813 )
+scale = Vector2( 154.542, 5.90815 )
+
+[node name="VisibilityNotifier2D2" type="VisibilityNotifier2D" parent="."]
+position = Vector2( 0.417992, -4.15009 )
+scale = Vector2( 6.92008, 99.1638 )
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 2.38379, 1.72163 )
+shape = SubResource( 1 )
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Area2D"]
+position = Vector2( 2.38379, 1.72163 )
+shape = SubResource( 2 )
+[connection signal="viewport_exited" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_viewport_exited"]
+[connection signal="viewport_exited" from="VisibilityNotifier2D2" to="." method="_on_VisibilityNotifier2D_viewport_exited"]
+[connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]
